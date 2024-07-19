@@ -1,4 +1,3 @@
-// @ts-ignore
 import Phaser from 'phaser'
 
 export class SmokeParticleScene extends Phaser.Scene {
