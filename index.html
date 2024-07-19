@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
+
+    <script>
+    class Example extends Phaser.Scene
+    {
+        preload ()
+        {
+            this.load.image('smoke', 'assets/smoke.png');
+        }
+
+        create ()
+        {
+            const particles = this.add.particles(0, 0, 'smoke', {
+                speed: 500,
+                scale: { start: 0.1, end: 0 },
+                blendMode: 'ADD'
+            });
+
+            let gameObject = this.physics.add.sprite(1, 1, 'gameObject');
+            gameObject.visible = false;  
+
+            gameObject.setVelocity(100, 200);
+            gameObject.setBounce(1, 1);
+            gameObject.setCollideWorldBounds(true);
+
+            particles.startFollow(gameObject);
+        }
+    }
+
+    const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        scene: Example,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 200 }
+            }
+        }
+    };
+
+    const game = new Phaser.Game(config);
+    </script>
+
+</body>
+</html>
