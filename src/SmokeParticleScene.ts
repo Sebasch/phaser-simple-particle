@@ -6,20 +6,22 @@ export class SmokeParticleScene extends Phaser.Scene {
     }
 
     create() {
-        const particles = this.add.particles(0, 0, 'smoke', {
+        const emitter = this.add.particles(0, 0, 'smoke', {
             speed: 500,
-            scale: { start: 0.1, end: 0 },
-            blendMode: 'ADD'
+            quantity: 0.5,
+            scale: { start: 0.05, end: 0 },
+            blendMode: 'ADD',
+            color: [ 0xffffff, 0x0000ff, 0xffff00, 0xff0000],
         });
 
         let invisibleObject = this.physics.add.sprite(1, 1, 'gameObject');
         invisibleObject.visible = false;
 
-        invisibleObject.setVelocity(100, 200);
+        invisibleObject.setVelocity(50, 20); 
         invisibleObject.setBounce(1, 1);
         invisibleObject.setCollideWorldBounds(true);
 
-        particles.startFollow(invisibleObject);
+        emitter.startFollow(invisibleObject);
     }
 }
 
